@@ -43,9 +43,6 @@ function CheckIfSearch()
         wait(0.5)
         if game.Players.LocalPlayer.PlayerGui.MainGui.MainBattle.FrontBox.NameLabel.Text == targetdoodle then
             print("target found")
-            getgenv().autoFarmSewer = false
-            getgenv().autoFarmLodge = false
-            getgenv().autoFarmLake = false
             break
         else
             mouse1click()
