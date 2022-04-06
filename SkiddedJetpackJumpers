@@ -1,0 +1,244 @@
+--Variables
+getgenv().OPcoinFarm = false
+getgenv().LaunchFarm = false
+getgenv().gemFarm = false
+getgenv().infJump = false
+getgenv().OpenTier1Trail = false
+getgenv().OpenTier2Trail = false
+getgenv().OpenTier3Trail = false
+getgenv().OpenTier1Pet = false
+getgenv().Delay = 0.5
+getgenv().CJumps = 5
+
+   local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))() 
+
+local s = VLib:Window("miso soup is good", "Jetpack Jumpers", "JJ")
+
+--please help i dont even understand my own script
+local ss = s:Tab("Autofarm")
+ss:Label("Also your camera usually breaks when you use these")
+ss:Label("Launch Farm still gives you some coins")
+ss:Label("Use this as a slow coin farm if you are worried about a ban")
+ss:Toggle("Launch Farm",function(t)
+getgenv().LaunchFarm = t
+LaunchFarmFunction()
+end)
+
+ss:Label("OP Coin Farm gives around 5b coin/minute")
+ss:Label("not sure if it can get you banned using this")
+ss:Toggle("OP Coin Farm",function(t)
+getgenv().OPcoinFarm = t
+coinFarmFunction()
+end)
+
+ss:Toggle("Gem Farm",function(t)
+getgenv().gemFarm = t
+GemFarmFunction()
+end)
+
+--this is the shit part
+local sss = s:Tab("Jetpack Equips")
+sss:Button("Wooden Jetpack 1",function()
+local args = {[1] = "Jetpack_1"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Wooden Jetpack 2",function()
+local args = {[1] = "Jetpack_2"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Wooden Jetpack 3",function()
+local args = {[1] = "Jetpack_1"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Iron Jetpack 1",function()
+local args = {[1] = "Jetpack_4"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Iron Jetpack 2",function()
+local args = {[1] = "Jetpack_5"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Iron Jetpack 3",function()
+local args = {[1] = "Jetpack_6"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Steampunk Jetpack 1",function()
+local args = {[1] = "Jetpack_7"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Steampunk Jetpack 2",function()
+local args = {[1] = "Jetpack_8"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+sss:Button("Steampunk Jetpack 3",function()
+local args = {[1] = "Jetpack_9"}
+game:GetService("ReplicatedStorage").TGSGearSystem_EqJetpack:InvokeServer(unpack(args))
+end)
+
+--ok this is just because i had nothing to do
+local ssssss = s:Tab("Trails And Pets Stuff")
+ssssss:Label("Delay is time between each open")
+ssssss:Label("If it doesn't work check if your inventory is full")
+
+ssssss:Textbox("Delay", true,function(t)
+getgenv().Delay = t
+end)
+
+ssssss:Toggle("Open Tier 1 Trail",function(t)
+getgenv().OpenTier1Trail = t
+Tier1TrailFunction()
+end)
+
+ssssss:Toggle("Open Tier 2 Trail",function(t)
+getgenv().OpenTier2Trail = t
+Tier2TrailFunction()
+end)
+
+ssssss:Toggle("Open Tier 3 Trail",function(t)
+getgenv().OpenTier3Trail = t
+Tier3TrailFunction()
+end)
+
+ssssss:Toggle("Open Tier 1 Pet",function(t)
+getgenv().OpenTier1Pet = t
+Tier1PetFunction()
+end)
+
+-- what the fuck do i add here
+local sssss = s:Tab("Jump Stuff")
+sssss:Toggle("Infinite Jumps",function(t)
+getgenv().infJump = t
+InfJumpFunction()
+end)
+
+sssss:Label("After clicking apply launch and reset for it to apply")
+
+sssss:Textbox("Custom Jump Amount", true,function(t)
+getgenv().CJumps = t
+end)
+
+sssss:Button("Apply Custom Jump Amount",function()
+for i,v in pairs(getgc(true)) do
+if type(v) == 'table' and rawget(v, "MidairJump") then
+v.MidairJump = CJumps
+end
+end
+end)
+
+
+--This code is so fucking messy please help
+local ssss = s:Tab("Credits + Changelog")
+ssss:Label("OP Coin farm is made by RoxyRekt")
+ssss:Label("Also you can just find it on robloxscripts.com")
+ssss:Label("--Below here is all changelog stuff--")
+ssss:Label("I'm using the format day/month/year ok")
+ssss:Label("9/11/21 made script")
+ssss:Label("12/11/21 added gem and launch farm")
+ssss:Label("13/11/21 added inf jumps")
+ssss:Label("13/11/21 removed equip jetpacks bc i broke it")
+ssss:Label("13/11/21 added back equip jetpacks bc i broke it")
+ssss:Label("14/11/21 fixed launch farm breaking and stopping")
+ssss:Label("16/11/21 improved launch farm and added new jetpacks")
+ssss:Label("3/12/21 added Trails and Pet Stuff")
+ssss:Label("15/12/21 Added Custom Jump Amount")
+ssss:Label("15/12/21 Removed Extras and Added Jump Stuff")
+
+--functions
+function LaunchFarmFunction()
+    while LaunchFarm do
+        wait(0.5)
+        local args = {[1] = workspace.World.Lobby.Launcher.Collision}
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientNewLaunchEvent:FireServer(unpack(args))
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108, 892, 13294)
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientStopLaunchEvent:FireServer()
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientEndLaunchEvent:FireServer()
+        wait(0.1)
+    end
+end
+
+function coinFarmFunction()
+    while OPcoinFarm do
+        wait(3)
+        local args = {[1] = workspace.World.Lobby.Launcher.Collision}
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientNewLaunchEvent:FireServer(unpack(args))
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108391248, 9e+18, 9e+18)
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientStopLaunchEvent:FireServer()
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientEndLaunchEvent:FireServer()
+        wait(0.1)
+    end
+end
+
+function GemFarmFunction()
+    while gemFarm do
+        wait(0.1)
+        local args = {[1] = workspace.World.Lobby.Launcher.Collision}
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientNewLaunchEvent:FireServer(unpack(args))
+        wait(0.1)
+        local args = {[1] = workspace.World.Areas.Area2.Hoops.GemHoops.SuperGemHoop.GemHoop}
+        game:GetService("ReplicatedStorage").ProjectBlue_GemHoopEvent:FireServer(unpack(args))
+        wait()
+        local args = {[1] = workspace.World.Areas.Area2.Hoops.GemHoops.SuperGemHoop.GemHoop}
+        game:GetService("ReplicatedStorage").ProjectBlue_GemHoopEvent:FireServer(unpack(args))
+        wait()
+        local args = {[1] = workspace.World.Areas.Area2.Hoops.GemHoops.SuperGemHoop.GemHoop}
+        game:GetService("ReplicatedStorage").ProjectBlue_GemHoopEvent:FireServer(unpack(args))
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientStopLaunchEvent:FireServer()
+        wait(0.1)
+        game:GetService("ReplicatedStorage").ProjectBlue_ClientEndLaunchEvent:FireServer()
+    end
+end
+
+function InfJumpFunction()
+    while infJump do
+        wait()
+        local args = {[1] = workspace.World.Areas.Area1.Hoops.Extrajumps.ExtraJumpHoop.JumpHoop}
+        game:GetService("ReplicatedStorage").ProjectBlue_JumpHoopEvent:FireServer(unpack(args))
+    end
+end
+
+function Tier1TrailFunction()
+    while OpenTier1Trail do
+        wait(Delay)
+        local args = {[1] = "Area_01"}
+        game:GetService("ReplicatedStorage").TGSTrailShopRoll:InvokeServer(unpack(args))
+    end
+end
+
+function Tier2TrailFunction()
+    while OpenTier2Trail do
+        wait(Delay)
+        local args = {[1] = "Area_02"}
+        game:GetService("ReplicatedStorage").TGSTrailShopRoll:InvokeServer(unpack(args))
+    end
+end
+
+function Tier3TrailFunction()
+    while OpenTier3Trail do
+        wait(Delay)
+        local args = {[1] = "Area_03"}
+        game:GetService("ReplicatedStorage").TGSTrailShopRoll:InvokeServer(unpack(args))
+    end
+end
+
+function Tier1PetFunction()
+    while OpenTier1Pet do
+        wait(Delay)
+        local args = {[1] = "Pets_01"}
+        game:GetService("ReplicatedStorage").TGSPetShopRoll:InvokeServer(unpack(args))
+    end
+end
