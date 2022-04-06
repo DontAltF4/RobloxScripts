@@ -1,7 +1,3 @@
---settings MUST change id
-local id = "youridhere"
-local targetdoodle = "doodleyouwanttofind"
-
 --Enouncter things
 getgenv().autoFarmLake = false
 getgenv().autoFarmLodge = false
