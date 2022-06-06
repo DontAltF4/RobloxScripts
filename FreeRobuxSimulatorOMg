@@ -1,9 +1,8 @@
-
 local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
 
 local w = library:CreateWindow("Free Robux Gui")
 
-local b = w:CreateFolder("Pet Fucker")
+local b = w:CreateFolder("Infinite Pets")
 
 b:Button("Free Pet",function()
     local args = {[1] = game:GetService("Players").LocalPlayer,[2] = "Gray Cat"}
@@ -11,14 +10,39 @@ b:Button("Free Pet",function()
 end)
 
 
-local bb = w:CreateFolder("Stat Fucker")
+
+local bb = w:CreateFolder("Infinite Coins")
 
 bb:Button("Give 3.4M Coins",function()
     local args = {[1] = -3472842}
     game:GetService("ReplicatedStorage").Remotes.BuySpeed:FireServer(unpack(args))
 end)
 
+bb:Button("Give 100k Coins",function()
+    local args = {[1] = -100000}
+    game:GetService("ReplicatedStorage").Remotes.BuySpeed:FireServer(unpack(args))
+end)
+
 bb:Button("Give 10k Coins",function()
     local args = {[1] = -10000}
     game:GetService("ReplicatedStorage").Remotes.BuySpeed:FireServer(unpack(args))
+end)
+
+
+
+local bbb = w:CreateFolder("Infinite Gems")
+
+bbb:Button("Give 347k Gems",function()
+    local args = {[1] = -347284}
+    game:GetService("ReplicatedStorage").Remotes.BuyEquipMore:FireServer(unpack(args))
+end)
+
+bbb:Button("Give 10k Gems",function()
+    local args = {[1] = -10000}
+    game:GetService("ReplicatedStorage").Remotes.BuyEquipMore:FireServer(unpack(args))
+end)
+
+bbb:Button("Give 1k Gems",function()
+    local args = {[1] = -1000}
+    game:GetService("ReplicatedStorage").Remotes.BuyEquipMore:FireServer(unpack(args))
 end)
