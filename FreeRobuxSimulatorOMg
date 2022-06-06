@@ -1,0 +1,24 @@
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("Free Robux Gui")
+
+local b = w:CreateFolder("Pet Fucker")
+
+b:Button("Free Pet",function()
+    local args = {[1] = game:GetService("Players").LocalPlayer,[2] = "Gray Cat"}
+    game:GetService("ReplicatedStorage").Remotes.StarterPet.GrayCat:FireServer(unpack(args))
+end)
+
+
+local bb = w:CreateFolder("Stat Fucker")
+
+bb:Button("Give 3.4M Coins",function()
+    local args = {[1] = -3472842}
+    game:GetService("ReplicatedStorage").Remotes.BuySpeed:FireServer(unpack(args))
+end)
+
+bb:Button("Give 10k Coins",function()
+    local args = {[1] = -10000}
+    game:GetService("ReplicatedStorage").Remotes.BuySpeed:FireServer(unpack(args))
+end)
