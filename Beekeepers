@@ -1,5 +1,7 @@
 getgenv().autoShovel = false
+getgenv().AutoSell = false
 getgenv().MyHive = PlaceHolder
+getgenv().SellPoint = PlaceHolder
 
 function autoMineCheck1()
     while autoShovel do
@@ -17,13 +19,26 @@ function autoMineCheck2()
     end
 end
 
+function autoConvertWhenFullCheck()
+    while AutoSell do
+        wait(0.5)
+        if game.Players.LocalPlayer.leaderstats.Nectar.Value == SellPoint then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
+            wait(1)
+            game:GetService("ReplicatedStorage").Shared.Network.SellFood:FireServer()
+            repeat
+            wait()
+            until game.Players.LocalPlayer.leaderstats.Nectar.Value == "0"
+        end
+    end
+end
 
    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso hub", "Beekeepers", "MH")
+local s = VLib:Window("miso hub", "Beekeepers", "1.1")
 
 local ss = s:Tab("Autofarm")
-local sss = s:Tab("Extras")
+local sss = s:Tab("Config + Extras")
 
 
 ss:Toggle("Auto Dig",function(t)
@@ -32,13 +47,14 @@ ss:Toggle("Auto Dig",function(t)
     autoMineCheck2()
 end)
 
-
-
-
-
-sss:Button("TP to Hive",function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
+ss:Toggle("Auto Convert Reached Sell Point",function(t)
+    getgenv().AutoSell = t
+    autoConvertWhenFullCheck()
 end)
+
+
+
+sss:Label("These are things you need to set for the script to work")
 
 sss:Button("Link Hive",function()
     if game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive5.Nameplate.SurfaceGui.DisplayName.Text then
@@ -64,3 +80,13 @@ sss:Button("Link Hive",function()
     end
 end)
 
+sss:Textbox("Nectar Amount to convert at", true,function(t)
+    getgenv().SellPoint = t
+    print(SellPoint)
+end)
+
+sss:Label("Everything below are extras")
+
+sss:Button("TP to Hive",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
+end)
