@@ -1,4 +1,4 @@
---Enouncter things
+--Encounter things
 getgenv().autoFarmLake = false
 getgenv().autoFarmLodge = false
 getgenv().autoFarmSewer = false
