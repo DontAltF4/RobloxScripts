@@ -35,7 +35,7 @@ end
 
    local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso hub", "Beekeepers", "1.1")
+local s = VLib:Window("miso hub", "Beekeepers", "1.2")
 
 local ss = s:Tab("Autofarm")
 local sss = s:Tab("Config + Extras")
@@ -76,6 +76,14 @@ sss:Button("Link Hive",function()
     elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive1.Nameplate.SurfaceGui.DisplayName.Text then
         getgenv().MyHive = game:GetService("Workspace").Hives.Hive1.Nameplate
         print("succesfully linked to Hive Number 1")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive6.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive6.Nameplate
+        print("succesfully linked to Hive Number 6")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive7.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive7.Nameplate
+        print("succesfully linked to Hive Number 7")
         wait(0.2)
     end
 end)
