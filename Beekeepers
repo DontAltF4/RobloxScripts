@@ -1,5 +1,23 @@
 getgenv().autoShovel = false
+getgenv().HiveClaimed = false
 getgenv().AutoSell = false
+getgenv().CurrentlyConverting = false
+getgenv().autoPickUp = false
+getgenv().autoWater = false
+getgenv().AutoFarmPaused = false
+getgenv().PoppyFarm = false
+getgenv().OrangeField = false
+getgenv().PepperField = false
+getgenv().MenrilField = false
+getgenv().DaisyField = false
+getgenv().DaffodilField = false
+getgenv().BlueFungusField = false
+getgenv().RosaBellaField = false
+getgenv().RedFungusField = false
+getgenv().MelonField = false
+getgenv().GlowFungusField = false
+getgenv().ForestField = false
+getgenv().CherryBlossomField = false
 getgenv().MyHive = PlaceHolder
 getgenv().SellPoint = PlaceHolder
 
@@ -23,22 +41,225 @@ function autoConvertWhenFullCheck()
     while AutoSell do
         wait(0.5)
         if game.Players.LocalPlayer.leaderstats.Nectar.Value == SellPoint then
+            getgenv().CurrentlyConverting = true
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
             wait(1)
             game:GetService("ReplicatedStorage").Shared.Network.SellFood:FireServer()
             repeat
             wait()
             until game.Players.LocalPlayer.leaderstats.Nectar.Value == "0"
+            getgenv().CurrentlyConverting = false
         end
     end
 end
 
-   local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+function autoGetAbility()
+    while autoPickUp do
+        wait(0.75)
+        if CurrentlyConverting == false then
+            if AutoFarmPaused == false then
+                for _,v in pairs(workspace:GetDescendants()) do
+                  if v.Name == "AbilityToken" then
+                       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                    end
+                end
+            elseif AutoFarmPaused then
+                repeat
+                    wait()
+                until AutoFarmPaused == false
+            end
+        end
+    end
+end
 
-local s = VLib:Window("miso hub", "Beekeepers", "1.2")
+function AutoPoppyPlot()
+    while PoppyFarm do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Poppy Plot"].CFrame
+            wait(35)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
 
-local ss = s:Tab("Autofarm")
-local sss = s:Tab("Config + Extras")
+function AutoOrangeField()
+    while OrangeField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Orange Field"].CFrame
+            wait(35)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoPepperBell()
+    while PepperField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Bellflower Field"].CFrame
+            wait(35)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function autoWateringCan()
+    while autoWater do
+        wait(1)
+        game:GetService("ReplicatedStorage").Shared.Network.UseWateringCan:FireServer()
+    end
+end
+
+function AutoMenrilField()
+    while MenrilField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Menril Field"].CFrame
+            wait(25)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoDaisyField()
+    while DaisyField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Daisy Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoDaffodilField()
+    while DaffodilField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Daffodil Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoBlueFungusField()
+    while BlueFungusField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Blue Fungus Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoRosaBellaField()
+    while RosaBellaField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Rosa Bella Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoRedFungusField()
+    while RedFungusField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Red Fungus Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoMelonField()
+    while MelonField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Melon Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoGlowFungusField()
+    while GlowFungusField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Glow Fungus Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoForestField()
+    while ForestField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Forest Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoCherryBlossomField()
+    while CherryBlossomField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Cherry Blossom Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+
+local s = VLib:Window("miso soup", "Beekeepers", "2.0")
+
+local ss = s:Tab("Auto Features")
+local sss = s:Tab("Tier 1 Autofarms")
+local a = s:Tab("Tier 2 Autofarms")
+local aa = s:Tab("Tier 3 Autofarms")
+local aaa = s:Tab("OP Autofarms")
+local ssss = s:Tab("Config + Extras")
+
 
 
 ss:Toggle("Auto Dig",function(t)
@@ -47,17 +268,112 @@ ss:Toggle("Auto Dig",function(t)
     autoMineCheck2()
 end)
 
-ss:Toggle("Auto Convert Reached Sell Point",function(t)
+ss:Toggle("Auto Watering Can",function(t)
+    getgenv().autoWater = t
+    autoWateringCan()
+end)
+
+ss:Toggle("Auto Collect Ability Tokens (Buggy)",function(t)
+    getgenv().autoPickUp = t
+    autoGetAbility()
+end)
+
+ss:Toggle("Auto Convert When Backpack Full",function(t)
     getgenv().AutoSell = t
     autoConvertWhenFullCheck()
 end)
 
+ss:Textbox("Your backpack capacity", true,function(t)
+    getgenv().SellPoint = t
+    print(SellPoint)
+end)
 
 
-sss:Label("These are things you need to set for the script to work")
 
-sss:Button("Link Hive",function()
-    if game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive5.Nameplate.SurfaceGui.DisplayName.Text then
+sss:Toggle("Autofarm Poppy Plot",function(t)
+    getgenv().PoppyFarm = t
+    AutoPoppyPlot()
+end)
+sss:Toggle("Autofarm Daffodil Field",function(t)
+    getgenv().DaffodilField = t
+    AutoDaffodilField()
+end)
+sss:Toggle("Autofarm Blue Fungus Field",function(t)
+    getgenv().BlueFungusField = t
+    AutoBlueFungusField()
+end)
+sss:Toggle("Autofarm Rosa Bella Field",function(t)
+    getgenv().RosaBellaField = t
+    AutoRosaBellaField()
+end)
+
+
+a:Toggle("Autofarm Daisy Field",function(t)
+    getgenv().DaisyField = t
+    AutoDaisyField()
+end)
+a:Toggle("Autofarm Orange Field",function(t)
+    getgenv().OrangeField = t
+    AutoOrangeField()
+end)
+a:Toggle("Autofarm Red Fungus Field",function(t)
+    getgenv().RedFungusField = t
+    AutoRedFungusField()
+end)
+a:Toggle("Autofarm Melon Field",function(t)
+    getgenv().MelonField = t
+    AutoMelonField()
+end)
+a:Toggle("Autofarm Glow Fungus Field",function(t)
+    getgenv().GlowFungusField = t
+    AutoGlowFungusField()
+end)
+
+
+
+aa:Toggle("Autofarm Bellflower Field",function(t)
+    getgenv().PepperField = t
+    AutoPepperBell()
+end)
+aa:Toggle("Autofarm Forest Field",function(t)
+    getgenv().ForestField = t
+    AutoForestField()
+end)
+aa:Toggle("Autofarm Cherry Blossom Field",function(t)
+    getgenv().CherryBlossomField = t
+    AutoCherryBlossomField()
+end)
+
+
+
+aaa:Label("Synapse Only Sadly")
+
+aaa:Toggle("Autofarm Menril Field (Unreleased Field)",function(t)
+    getgenv().MenrilField = t
+    AutoMenrilField()
+end)
+
+aaa:Button("Noclip (Required)",function()
+    setfflag("HumanoidParallelRemoveNoPhysics", "False")
+    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+    wait(0.1)
+    game:GetService"RunService".Stepped:Connect(function() 
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
+    end)
+end)
+
+
+
+ssss:Button("Link Hive",function()
+    if game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive7.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive7.Nameplate
+        print("succesfully linked to Hive Number 7")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive6.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive6.Nameplate
+        print("succesfully linked to Hive Number 6")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive5.Nameplate.SurfaceGui.DisplayName.Text then
         getgenv().MyHive = game:GetService("Workspace").Hives.Hive5.Nameplate
         print("succesfully linked to Hive Number 5")
         wait(0.2)
@@ -77,24 +393,25 @@ sss:Button("Link Hive",function()
         getgenv().MyHive = game:GetService("Workspace").Hives.Hive1.Nameplate
         print("succesfully linked to Hive Number 1")
         wait(0.2)
-    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive6.Nameplate.SurfaceGui.DisplayName.Text then
-        getgenv().MyHive = game:GetService("Workspace").Hives.Hive6.Nameplate
-        print("succesfully linked to Hive Number 6")
-        wait(0.2)
-    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive7.Nameplate.SurfaceGui.DisplayName.Text then
-        getgenv().MyHive = game:GetService("Workspace").Hives.Hive7.Nameplate
-        print("succesfully linked to Hive Number 7")
-        wait(0.2)
     end
 end)
 
-sss:Textbox("Nectar Amount to convert at", true,function(t)
-    getgenv().SellPoint = t
-    print(SellPoint)
+ssss:Label("Everything below are extras")
+
+ssss:Button("TP to Hive",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
 end)
 
-sss:Label("Everything below are extras")
+ssss:Button("Invisible (To Prevent Reports)",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(559.69, 44.43, 15.2)
+    wait(0.3)
+    game.Players.LocalPlayer.Character.LowerTorso.Root:Destroy()
+end)
 
-sss:Button("TP to Hive",function()
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
+ssss:Label("Anchor will break jumping until you rejoin")
+
+ssss:Button("Anchor Player (Fix Auto Collect Tokens)",function()
+    game:GetService"RunService".Stepped:Connect(function() 
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
+    end)
 end)
