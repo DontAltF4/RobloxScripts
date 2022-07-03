@@ -18,6 +18,8 @@ getgenv().MelonField = false
 getgenv().GlowFungusField = false
 getgenv().ForestField = false
 getgenv().CherryBlossomField = false
+getgenv().CactusField = false
+getgenv().YellowFungusField = false
 getgenv().MyHive = PlaceHolder
 getgenv().SellPoint = PlaceHolder
 
@@ -248,6 +250,32 @@ function AutoCherryBlossomField()
     end
 end
 
+function AutoYellowFungusField()
+    while YellowFungusField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Yellow Fungus Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
+function AutoCactusField()
+    while CactusField do
+        wait(3)
+        if CurrentlyConverting == false then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").FieldRegions["Cactus Field"].CFrame
+            wait(40)
+            getgenv().AutoFarmPaused = false
+        elseif CurrentlyConverting then
+            getgenv().AutoFarmPaused = true
+        end
+    end
+end
+
 
 local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
@@ -257,7 +285,7 @@ local ss = s:Tab("Auto Features")
 local sss = s:Tab("Tier 1 Autofarms")
 local a = s:Tab("Tier 2 Autofarms")
 local aa = s:Tab("Tier 3 Autofarms")
-local aaa = s:Tab("OP Autofarms")
+local aaa = s:Tab("Tier 4 Autofarms")
 local ssss = s:Tab("Config + Extras")
 
 
@@ -346,22 +374,18 @@ end)
 
 
 
-aaa:Label("Synapse Only Sadly")
-
-aaa:Toggle("Autofarm Menril Field (Unreleased Field)",function(t)
+aaa:Toggle("Autofarm Menril Field",function(t)
     getgenv().MenrilField = t
     AutoMenrilField()
 end)
-
-aaa:Button("Noclip (Required)",function()
-    setfflag("HumanoidParallelRemoveNoPhysics", "False")
-    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
-    wait(0.1)
-    game:GetService"RunService".Stepped:Connect(function() 
-        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
-    end)
+aaa:Toggle("Autofarm Yellow Fungus Field",function(t)
+    getgenv().YellowFungusField = t
+    AutoYellowFungusField()
 end)
-
+aaa:Toggle("Autofarm Cactus Field",function(t)
+    getgenv().CactusField = t
+    AutoCactusField()
+end)
 
 
 ssss:Button("Link Hive",function()
@@ -411,6 +435,16 @@ end)
 ssss:Label("Anchor will break jumping until you rejoin")
 
 ssss:Button("Anchor Player (Fix Auto Collect Tokens)",function()
+    game:GetService"RunService".Stepped:Connect(function() 
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
+    end)
+end)
+
+
+aaa:Button("Noclip",function()
+    setfflag("HumanoidParallelRemoveNoPhysics", "False")
+    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+    wait(0.1)
     game:GetService"RunService".Stepped:Connect(function() 
         game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
     end)
