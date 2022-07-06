@@ -281,7 +281,7 @@ end
 
 local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso soup", "Beekeepers", "2.2")
+local s = VLib:Window("miso soup", "Beekeepers", "2.4")
 
 local ss = s:Tab("Auto Features")
 local sss = s:Tab("Tier 1 Autofarms")
