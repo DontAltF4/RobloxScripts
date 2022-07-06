@@ -60,16 +60,19 @@ function autoGetAbility()
         wait(0.75)
         if CurrentlyConverting == false then
             if AutoFarmPaused == false then
-                for _,v in pairs(workspace:GetDescendants()) do
-                  if v.Name == "AbilityToken" then
-                       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                for i, v in pairs(game:GetService("Workspace").Tokens:GetChildren()) do
+                    if v:IsA("MeshPart") then
+                          local HumanoidRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+                      local Target = v.CFrame
+                      HumanoidRoot.CFrame = CFrame.new(Target.Position.X, Target.Position.Y, Target.Position.Z)
+                      v:Destroy()
                     end
                 end
-            elseif AutoFarmPaused then
-                repeat
-                    wait()
-                until AutoFarmPaused == false
             end
+        elseif AutoFarmPaused then
+            repeat
+                wait()
+            until AutoFarmPaused == false
         end
     end
 end
@@ -279,7 +282,7 @@ end
 
 local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso soup", "Beekeepers", "2.0")
+local s = VLib:Window("miso soup", "Beekeepers", "2.2")
 
 local ss = s:Tab("Auto Features")
 local sss = s:Tab("Tier 1 Autofarms")
@@ -301,7 +304,7 @@ ss:Toggle("Auto Watering Can",function(t)
     autoWateringCan()
 end)
 
-ss:Toggle("Auto Collect Ability Tokens (Buggy)",function(t)
+ss:Toggle("Auto Collect Ability Tokens",function(t)
     getgenv().autoPickUp = t
     autoGetAbility()
 end)
@@ -432,16 +435,9 @@ ssss:Button("Invisible (To Prevent Reports)",function()
     game.Players.LocalPlayer.Character.LowerTorso.Root:Destroy()
 end)
 
-ssss:Label("Anchor will break jumping until you rejoin")
+ssss:Label("Noclip will break jumping until you rejoin")
 
-ssss:Button("Anchor Player (Fix Auto Collect Tokens)",function()
-    game:GetService"RunService".Stepped:Connect(function() 
-        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
-    end)
-end)
-
-
-aaa:Button("Noclip",function()
+ssss:Button("Noclip",function()
     setfflag("HumanoidParallelRemoveNoPhysics", "False")
     setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
     wait(0.1)
