@@ -1,5 +1,4 @@
 getgenv().autoShovel = false
-getgenv().HiveClaimed = false
 getgenv().AutoSell = false
 getgenv().CurrentlyConverting = false
 getgenv().autoPickUp = false
@@ -391,7 +390,7 @@ aaa:Toggle("Autofarm Cactus Field",function(t)
 end)
 
 
-ssss:Button("Link Hive",function()
+ssss:Button("Manual Link Hive",function()
     if game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive7.Nameplate.SurfaceGui.DisplayName.Text then
         getgenv().MyHive = game:GetService("Workspace").Hives.Hive7.Nameplate
         print("succesfully linked to Hive Number 7")
@@ -445,3 +444,38 @@ ssss:Button("Noclip",function()
         game.Players.LocalPlayer.Character.Humanoid:ChangeState(11) 
     end)
 end)
+
+
+
+--Link Hive
+while MyHive == PlaceHolder do
+    if game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive7.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive7.Nameplate
+        print("succesfully linked to Hive Number 7")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive6.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive6.Nameplate
+        print("succesfully linked to Hive Number 6")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive5.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive5.Nameplate
+        print("succesfully linked to Hive Number 5")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive4.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive4.Nameplate
+        print("succesfully linked to Hive Number 4")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive3.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive3.Nameplate
+        print("succesfully linked to Hive Number 3")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive2.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive2.Nameplate
+        print("succesfully linked to Hive Number 2")
+        wait(0.2)
+    elseif game.Players.LocalPlayer.DisplayName == game:GetService("Workspace").Hives.Hive1.Nameplate.SurfaceGui.DisplayName.Text then
+        getgenv().MyHive = game:GetService("Workspace").Hives.Hive1.Nameplate
+        print("succesfully linked to Hive Number 1")
+        wait(0.2)
+    end
+end
