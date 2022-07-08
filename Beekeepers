@@ -1,3 +1,6 @@
+--Improved Auto convert
+--Alternate collect tokens
+
 getgenv().autoShovel = false
 getgenv().AutoSell = false
 getgenv().CurrentlyConverting = false
@@ -19,6 +22,7 @@ getgenv().ForestField = false
 getgenv().CherryBlossomField = false
 getgenv().CactusField = false
 getgenv().YellowFungusField = false
+getgenv().AlternateTokens = false
 getgenv().MyHive = PlaceHolder
 getgenv().SellPoint = PlaceHolder
 
@@ -41,7 +45,7 @@ end
 function autoConvertWhenFullCheck()
     while AutoSell do
         wait(0.5)
-        if game.Players.LocalPlayer.leaderstats.Nectar.Value == SellPoint then
+        if game.Players.LocalPlayer.PlayerGui.UI.Notifications:FindFirstChild("Notification") then
             getgenv().CurrentlyConverting = true
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = MyHive.CFrame
             wait(1)
@@ -75,6 +79,18 @@ function autoGetAbility()
         end
     end
 end
+
+function TpLessCollect()
+    while AlternateTokens do
+        wait(0.1)
+        for i, v in pairs (game:GetService("Workspace").Tokens:GetDescendants()) do
+            if v.Name == "TouchInterest" and v.Parent then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0)
+            end
+        end
+    end
+end
+
 
 function AutoPoppyPlot()
     while PoppyFarm do
@@ -281,7 +297,7 @@ end
 
 local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso soup", "Beekeepers", "2.4")
+local s = VLib:Window("miso soup", "Beekeepers", "3.0")
 
 local ss = s:Tab("Auto Features")
 local sss = s:Tab("Tier 1 Autofarms")
@@ -306,6 +322,11 @@ end)
 ss:Toggle("Auto Collect Ability Tokens",function(t)
     getgenv().autoPickUp = t
     autoGetAbility()
+end)
+
+ss:Toggle("TPLess Collect Tokens",function(t)
+    getgenv().AlternateTokens = t
+    TpLessCollect()
 end)
 
 ss:Toggle("Auto Convert When Backpack Full",function(t)
