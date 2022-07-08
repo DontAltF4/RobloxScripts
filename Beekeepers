@@ -1,6 +1,3 @@
---Improved Auto convert
---Alternate collect tokens
-
 getgenv().autoShovel = false
 getgenv().AutoSell = false
 getgenv().CurrentlyConverting = false
