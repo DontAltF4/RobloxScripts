@@ -480,3 +480,5 @@ while MyHive == PlaceHolder do
         wait(0.2)
     end
 end
+
+print("this script is discontinued until the game updates so don't expect any bug fixes or new features for awhile")
