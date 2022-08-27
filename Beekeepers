@@ -21,6 +21,7 @@ getgenv().CactusField = false
 getgenv().YellowFungusField = false
 getgenv().MyHive = PlaceHolder
 getgenv().SellPoint = PlaceHolder
+getgenv().AlternateTokens = false
 
 function autoMineCheck1()
     while autoShovel do
@@ -72,6 +73,17 @@ function autoGetAbility()
             repeat
                 wait()
             until AutoFarmPaused == false
+        end
+    end
+end
+
+function TpLessCollect()
+    while AlternateTokens do
+        wait(0.1)
+        for i, v in pairs (game:GetService("Workspace").Tokens:GetDescendants()) do
+            if v.Name == "TouchInterest" and v.Parent then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0)
+            end
         end
     end
 end
@@ -281,7 +293,7 @@ end
 
 local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 
-local s = VLib:Window("miso soup", "Beekeepers", "3.2")
+local s = VLib:Window("miso soup", "Beekeepers", "3.3")
 
 local ss = s:Tab("Auto Features")
 local sss = s:Tab("Tier 1 Autofarms")
@@ -306,6 +318,11 @@ end)
 ss:Toggle("Auto Collect Ability Tokens",function(t)
     getgenv().autoPickUp = t
     autoGetAbility()
+end)
+
+ss:Toggle("TPLess Collect Tokens",function(t)
+    getgenv().AlternateTokens = t
+    TpLessCollect()
 end)
 
 ss:Toggle("Auto Convert When Backpack Full",function(t)
