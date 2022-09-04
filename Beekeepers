@@ -498,4 +498,4 @@ while MyHive == PlaceHolder do
     end
 end
 
-print("this script is discontinued until the game updates so don't expect any bug fixes or new features for awhile")
+print("discontinued")
