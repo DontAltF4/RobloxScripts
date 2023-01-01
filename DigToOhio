@@ -1,0 +1,8 @@
+--literally just teleports you to ohio so you can get points
+
+getgenv().Enabled = true
+
+while Enabled do
+wait(10)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-644.1, -2168.8, 92)
+end
