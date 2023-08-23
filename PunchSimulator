@@ -1,0 +1,106 @@
+--Variable Things
+local EggWorld = "1"
+getgenv().Hatch = false
+getgenv().Punch = false
+getgenv().RemoveAni = false
+getgenv().AutoDungeon = false
+
+--Stuff
+function RemoveAnimation()
+    while RemoveAni do
+        wait()
+        if game.ReplicatedStorage:FindFirstChild("EggOpenMap") then
+            game.ReplicatedStorage.EggOpenMap:Destroy()
+        end
+    end
+end
+
+function AutoHatch()
+    while Hatch do
+        wait(0.1)
+        local args = {[1] = EggWorld}
+        game:GetService("ReplicatedStorage").Events.PlayerPressedKeyOnEgg:FireServer(unpack(args))
+    end
+end
+
+function AutoPunch()
+    while Punch do
+        wait(0.1)
+        game:GetService("ReplicatedStorage").Events.DamageIncreaseOnClickEvent:FireServer()
+    end
+end
+
+function AutoDungeon()
+    while AutoDungeon do
+        wait()
+        local args = {[1] = "StartDungeon"}
+        game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
+        for i, v in pairs(game.Workspace.BreakableParts.Dungeon:GetChildren()) do
+            if v:IsA("Model") then
+            	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.LowerTorso.CFrame
+            	wait(0.2)
+                local args = {[1] = v}
+                game:GetService("ReplicatedStorage").Events.PunchEvent:FireServer(unpack(args))
+            end
+        end
+    end
+end
+
+--Gui
+_G.ToggleColor = Color3.fromRGB(255,0,0)
+_G.ButtonColor = Color3.fromRGB(0,255,0)
+_G.SliderColor = Color3.fromRGB(0,0,255)
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+
+local w = library:CreateWindow("Punch Simulator")
+
+local b = w:CreateFolder("Autofarm")
+local c = w:CreateFolder("Extras/Settings")
+
+--b:Label("made by miso soup#9999",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
+--b:Label("You can use auto train and open egg while in fights",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
+
+b:Toggle("Auto Train ",function(bool)
+    getgenv().Punch = bool
+    AutoPunch()
+end)
+
+--b:Label("I suggest using auto egg with remove egg animation",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
+
+b:Toggle("Auto Open Egg",function(bool)
+    getgenv().Hatch = bool
+    AutoHatch()
+end)
+
+b:Dropdown("Open Egg From World",{"1","2","3","4","5","6","7","8"},true,function(mob)
+    local EggWorld = mob
+end)
+
+--b:Label("use auto dungeon in a private server or you'll tp to other people's dungeons",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
+
+b:Toggle("Auto Farm Dungeon",function(bool)
+    getgenv().AutoDungeon = bool
+    AutoDungeon()
+end)
+
+c:Toggle("Remove Egg Animation",function(bool)
+    getgenv().RemoveAni = bool
+    RemoveAnimation()
+end)
+
+c:Button("Anti Afk (stolen from someone on v3rm)",function()
+    repeat
+    wait()
+    until game:IsLoaded()
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+    v:Disable()
+    end
+end)
+
+
+
+
+c:DestroyGUI()
+
+c:GuiSettings()
