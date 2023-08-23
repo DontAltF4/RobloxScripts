@@ -30,17 +30,18 @@ function AutoPunch()
 end
 
 function AutoDungeon()
+    while Dungeon do
+        wait()
+        local args = {[1] = "StartDungeon"}
+        game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
         while Dungeon do
-            wait()
-            if game.WorkSpace.BreakableParts.Dungeon:FindFirstChild(Model) then
-            local args = {[1] = "StartDungeon"}
-            game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
-            for i, v in pairs(game.Workspace.BreakableParts.Dungeon:GetChildren()) do
-                if v:IsA("Model") then
-                	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.LowerTorso.CFrame
-                	wait(0.2)
-                    local args = {[1] = v}
-                    game:GetService("ReplicatedStorage").Events.PunchEvent:FireServer(unpack(args))
+            wait(0.1)
+        for i, v in pairs(game.Workspace.BreakableParts.Dungeon:GetChildren()) do
+            if v:IsA("Model") then
+            	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.LowerTorso.CFrame
+            	wait(0.2)
+                local args = {[1] = v}
+                game:GetService("ReplicatedStorage").Events.PunchEvent:FireServer(unpack(args))
                 end
             end
         end
@@ -80,7 +81,7 @@ end)
 
 --b:Label("use auto dungeon in a private server or you'll tp to other people's dungeons",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
 
-b:Toggle("Auto Farm Dungeon (not fully working)",function(bool)
+b:Toggle("Auto Farm Dungeon (VIP Server Only)",function(bool)
     getgenv().Dungeon = bool
     AutoDungeon()
 end)
