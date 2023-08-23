@@ -1,9 +1,8 @@
 --Variable Things
-local EggWorld = "1"
 getgenv().Hatch = false
 getgenv().Punch = false
 getgenv().RemoveAni = false
-getgenv().AutoDungeon = false
+getgenv().Dungeon = false
 
 --Stuff
 function RemoveAnimation()
@@ -31,7 +30,7 @@ function AutoPunch()
 end
 
 function AutoDungeon()
-    while AutoDungeon do
+    while Dungeon do
         wait()
         local args = {[1] = "StartDungeon"}
         game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
@@ -74,13 +73,13 @@ b:Toggle("Auto Open Egg",function(bool)
 end)
 
 b:Dropdown("Open Egg From World",{"1","2","3","4","5","6","7","8"},true,function(mob)
-    local EggWorld = mob
+    getgenv().EggWorld = mob
 end)
 
 --b:Label("use auto dungeon in a private server or you'll tp to other people's dungeons",Color3.fromRGB(38,38,38),Color3.fromRGB(0,216,111))
 
-b:Toggle("Auto Farm Dungeon",function(bool)
-    getgenv().AutoDungeon = bool
+b:Toggle("Auto Farm Dungeon (not fully working)",function(bool)
+    getgenv().Dungeon = bool
     AutoDungeon()
 end)
 
@@ -89,7 +88,7 @@ c:Toggle("Remove Egg Animation",function(bool)
     RemoveAnimation()
 end)
 
-c:Button("Anti Afk (stolen from someone on v3rm)",function()
+c:Button("Anti Afk (stolen)",function()
     repeat
     wait()
     until game:IsLoaded()
@@ -97,10 +96,3 @@ c:Button("Anti Afk (stolen from someone on v3rm)",function()
     v:Disable()
     end
 end)
-
-
-
-
-c:DestroyGUI()
-
-c:GuiSettings()
