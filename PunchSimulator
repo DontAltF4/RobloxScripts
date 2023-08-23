@@ -30,16 +30,18 @@ function AutoPunch()
 end
 
 function AutoDungeon()
-    while Dungeon do
-        wait()
-        local args = {[1] = "StartDungeon"}
-        game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
-        for i, v in pairs(game.Workspace.BreakableParts.Dungeon:GetChildren()) do
-            if v:IsA("Model") then
-            	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.LowerTorso.CFrame
-            	wait(0.2)
-                local args = {[1] = v}
-                game:GetService("ReplicatedStorage").Events.PunchEvent:FireServer(unpack(args))
+        while Dungeon do
+            wait()
+            if game.WorkSpace.BreakableParts.Dungeon:FindFirstChild(Model) then
+            local args = {[1] = "StartDungeon"}
+            game:GetService("ReplicatedStorage").Events.DungeonEvent:FireServer(unpack(args))
+            for i, v in pairs(game.Workspace.BreakableParts.Dungeon:GetChildren()) do
+                if v:IsA("Model") then
+                	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.LowerTorso.CFrame
+                	wait(0.2)
+                    local args = {[1] = v}
+                    game:GetService("ReplicatedStorage").Events.PunchEvent:FireServer(unpack(args))
+                end
             end
         end
     end
